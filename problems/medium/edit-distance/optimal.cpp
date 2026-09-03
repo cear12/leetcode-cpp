@@ -1,18 +1,17 @@
+#include "../../common/leetcode_common.h"
+
 // Time: O(mn), Space: O(mn)
-
-#include <vector>
-#include <string>
-#include <algorithm>
-
-using namespace std;
 
 class Solution {
 public:
     int minDistance(string word1, string word2) {
         int m = word1.size(), n = word2.size();
         vector<vector<int>> dp(m + 1, vector<int>(n + 1));
-        for (int i = 0; i <= m; ++i) dp[i] = i;
-        for (int j = 0; j <= n; ++j) dp[j] = j;
+        // BUG FIX: base-case initialization must index into the 2D table
+        // (dp[i][0] / dp[0][j]); the original assigned a whole row/column
+        // vector to an int (dp[i] = i), which doesn't compile.
+        for (int i = 0; i <= m; ++i) dp[i][0] = i;
+        for (int j = 0; j <= n; ++j) dp[0][j] = j;
         for (int i = 1; i <= m; ++i)
             for (int j = 1; j <= n; ++j)
                 if (word1[i - 1] == word2[j - 1])
@@ -22,3 +21,24 @@ public:
         return dp[m][n];
     }
 };
+
+int main() {
+    struct Case { string word1; string word2; int expected; };
+    vector<Case> cases = {
+        {"horse", "ros", 3},
+        {"intention", "execution", 5},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (const auto& c : cases) {
+        int result = sol.minDistance(c.word1, c.word2);
+        cout << "Input: word1 = \"" << c.word1 << "\", word2 = \"" << c.word2 << "\"\n";
+        cout << "Output: " << result << " -- expected " << c.expected << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}
+

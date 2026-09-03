@@ -1,3 +1,5 @@
+#include "../../common/leetcode_common.h"
+
 class Solution {
 public:
     int maxValueOfCoins(vector<vector<int>>& piles, int k) {
@@ -11,14 +13,14 @@ public:
             // Вычисляем префиксные суммы для текущей кучи
             // prefix[j] = сумма первых j монет в куче piles[i-1]
             vector<int> prefix(piles[i-1].size() + 1, 0);
-            for (int j = 1; j <= piles[i-1].size(); j++) {
+            for (int j = 1; j <= static_cast<int>(piles[i-1].size()); j++) {
                 prefix[j] = prefix[j-1] + piles[i-1][j-1];
             }
             
             // Для каждого количества монет j
             for (int j = 0; j <= k; j++) {
                 // Пробуем взять take монет из текущей кучи (от 0 до min(размер_кучи, j))
-                for (int take = 0; take < prefix.size() && take <= j; take++) {
+                for (int take = 0; take < static_cast<int>(prefix.size()) && take <= j; take++) {
                     // Обновляем максимум:
                     // dp[i-1][j-take] - оптимальный результат без текущей кучи с (j-take) монетами
                     // prefix[take] - ценность take монет из текущей кучи
@@ -30,3 +32,24 @@ public:
         return dp[n][k];
     }
 };
+
+int main() {
+    struct Case { vector<vector<int>> piles; int k; int expected; };
+    vector<Case> cases = {
+        {{{1, 100, 3}, {7, 8, 9}}, 2, 101},
+        {{{100}, {100}, {100}, {100}, {100}, {100}, {1, 1, 1, 1, 1, 1, 700}}, 7, 706},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (auto c : cases) {
+        int result = sol.maxValueOfCoins(c.piles, c.k);
+        cout << "Input: piles = ";
+        printVector2D(c.piles);
+        cout << ", k = " << c.k << "\nOutput: " << result << " -- expected " << c.expected << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

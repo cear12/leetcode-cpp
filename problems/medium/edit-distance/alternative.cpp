@@ -1,10 +1,6 @@
+#include "../../common/leetcode_common.h"
+
 // Time: O(mn), Space: O(n)
-
-#include <vector>
-#include <string>
-#include <algorithm>
-
-using namespace std;
 
 class Solution {
 public:
@@ -27,3 +23,24 @@ public:
         return dp[n];
     }
 };
+
+int main() {
+    struct Case { string word1; string word2; int expected; };
+    vector<Case> cases = {
+        {"horse", "ros", 3},
+        {"intention", "execution", 5},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (const auto& c : cases) {
+        int result = sol.minDistance(c.word1, c.word2);
+        cout << "Input: word1 = \"" << c.word1 << "\", word2 = \"" << c.word2 << "\"\n";
+        cout << "Output: " << result << " -- expected " << c.expected << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}
+

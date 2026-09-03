@@ -1,3 +1,5 @@
+#include "../../common/leetcode_common.h"
+
 class Solution {
 public:
     int maxCoins(vector<int>& piles) {
@@ -20,3 +22,24 @@ public:
         return result;
     }
 };
+int main() {
+    struct Case { vector<int> piles; int expected; };
+    vector<Case> cases = {
+        {{2, 4, 1, 2, 7, 8}, 9},
+        {{2, 4, 5}, 4},
+        {{9, 8, 7, 6, 5, 1, 2, 3, 4}, 18},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (auto c : cases) {
+        int result = sol.maxCoins(c.piles);
+        cout << "Input: piles = ";
+        printVector(c.piles);
+        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

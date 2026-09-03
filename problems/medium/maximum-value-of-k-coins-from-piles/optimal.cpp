@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int maxValueOfCoins(vector<vector<int>>& piles, int k) {
+    int MaxValueOfCoins(vector<vector<int>>& piles, int k) {
         int n = piles.size();
         
         // dp[i][j] = максимальная ценность при использовании первых i куч и взятии j монет
@@ -34,22 +34,22 @@ public:
 };
 
 int main() {
-    struct Case { vector<vector<int>> piles; int k; int expected; };
+    struct Case { vector<vector<int>> piles_; int k_; int expected_; };
     vector<Case> cases = {
         {{{1, 100, 3}, {7, 8, 9}}, 2, 101},
         {{{100}, {100}, {100}, {100}, {100}, {100}, {1, 1, 1, 1, 1, 1, 700}}, 7, 706},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        int result = sol.maxValueOfCoins(c.piles, c.k);
+        int result = sol.MaxValueOfCoins(c.piles_, c.k_);
         cout << "Input: piles = ";
-        printVector2D(c.piles);
-        cout << ", k = " << c.k << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector2D(c.piles_);
+        cout << ", k = " << c.k_ << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

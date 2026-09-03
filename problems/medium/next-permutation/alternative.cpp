@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    void nextPermutation(vector<int>& nums) {
+    void NextPermutation(vector<int>& nums) {
         int n = nums.size();
         int pivot = -1;
 
@@ -38,28 +38,28 @@ public:
 
 
 int main() {
-    struct Case { vector<int> nums; vector<int> expected; };
+    struct Case { vector<int> nums_; vector<int> expected_; };
     vector<Case> cases = {
         {{1, 2, 3}, {1, 3, 2}},
         {{3, 2, 1}, {1, 2, 3}},
         {{1, 1, 5}, {1, 5, 1}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        vector<int> nums = c.nums;
-        sol.nextPermutation(nums);
+        vector<int> nums = c.nums_;
+        sol.NextPermutation(nums);
         cout << "Input: nums = ";
-        printVector(c.nums);
+        PrintVector(c.nums_);
         cout << "\nOutput: ";
-        printVector(nums);
+        PrintVector(nums);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = nums == c.expected;
-        allOk = allOk && ok;
+        bool ok = nums == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

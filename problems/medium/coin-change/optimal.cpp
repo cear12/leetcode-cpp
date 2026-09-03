@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int coinChange(vector<int>& coins, int amount) {
+    int CoinChange(vector<int>& coins, int amount) {
         vector<int> dp( amount + 1, INT_MAX ); 
 
         dp[ 0 ] = 0;
@@ -28,7 +28,7 @@ int main() {
     vector<int> coins = {1, 2, 5};
     int amount = 11;
     Solution sol;
-    int result = sol.coinChange(coins, amount);
+    int result = sol.CoinChange(coins, amount);
 
     cout << "Input: coins = [1,2,5], amount = 11\n";
     cout << "Output: " << result << " -- expected 3\n";

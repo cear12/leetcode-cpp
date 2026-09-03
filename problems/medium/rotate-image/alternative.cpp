@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    void rotate(vector<vector<int>>& matrix) {
+    void Rotate(vector<vector<int>>& matrix) {
         int n = matrix.size();
         for (int layer = 0; layer < n / 2; ++layer) {
             int first = layer, last = n - 1 - layer;
@@ -21,28 +21,28 @@ public:
 // Память: O(1)
 
 int main() {
-    struct Case { vector<vector<int>> matrix; vector<vector<int>> expected; };
+    struct Case { vector<vector<int>> matrix_; vector<vector<int>> expected_; };
     vector<Case> cases = {
         {{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, {{7, 4, 1}, {8, 5, 2}, {9, 6, 3}}},
         {{{5, 1, 9, 11}, {2, 4, 8, 10}, {13, 3, 6, 7}, {15, 14, 12, 16}},
          {{15, 13, 2, 5}, {14, 3, 4, 1}, {12, 6, 8, 9}, {16, 7, 10, 11}}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        vector<vector<int>> matrix = c.matrix;
-        sol.rotate(matrix);
+        vector<vector<int>> matrix = c.matrix_;
+        sol.Rotate(matrix);
         cout << "Input: matrix = ";
-        printVector2D(c.matrix);
+        PrintVector2D(c.matrix_);
         cout << "\nOutput: ";
-        printVector2D(matrix);
+        PrintVector2D(matrix);
         cout << " -- expected ";
-        printVector2D(c.expected);
+        PrintVector2D(c.expected_);
         cout << "\n";
-        bool ok = matrix == c.expected;
-        allOk = allOk && ok;
+        bool ok = matrix == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

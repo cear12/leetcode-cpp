@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int change(int amount, vector<int>& coins) {
+    int Change(int amount, vector<int>& coins) {
         // dp[i] = количество способов получить сумму i
         vector<int> dp(amount + 1, 0);
         
@@ -32,7 +32,7 @@ int main() {
     int amount = 5;
     vector<int> coins = {1, 2, 5};
     Solution sol;
-    int result = sol.change(amount, coins);
+    int result = sol.Change(amount, coins);
 
     cout << "Input: amount = 5, coins = [1,2,5]\n";
     cout << "Output: " << result << " -- expected 4\n";

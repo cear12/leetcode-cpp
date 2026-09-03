@@ -1,46 +1,46 @@
 #include "../../common/leetcode_common.h"
 
 struct TrieNode {
-    TrieNode* children[26];
-    bool isWord;
-    TrieNode() : isWord(false) {
-        for (auto &c : children) c = nullptr;
+    TrieNode* children_[26];
+    bool is_word_;
+    TrieNode() : is_word_(false) {
+        for (auto &c : children_) c = nullptr;
     }
 };
 
 // O(n) per operation, O(k * n) space (k — alphabet size)
 class Trie {
 private:
-    TrieNode* root;
+    TrieNode* root_;
 public:
-    Trie() { root = new TrieNode(); }
+    Trie() { root_ = new TrieNode(); }
 
-    void insert(string word) {
-        TrieNode* node = root;
+    void Insert(string word) {
+        TrieNode* node = root_;
         for (char ch : word) {
             int i = ch - 'a';
-            if (!node->children[i]) node->children[i] = new TrieNode();
-            node = node->children[i];
+            if (!node->children_[i]) node->children_[i] = new TrieNode();
+            node = node->children_[i];
         }
-        node->isWord = true;
+        node->is_word_ = true;
     }
 
-    bool search(string word) {
-        TrieNode* node = root;
+    bool Search(string word) {
+        TrieNode* node = root_;
         for (char ch : word) {
             int i = ch - 'a';
-            if (!node->children[i]) return false;
-            node = node->children[i];
+            if (!node->children_[i]) return false;
+            node = node->children_[i];
         }
-        return node->isWord;
+        return node->is_word_;
     }
 
-    bool startsWith(string prefix) {
-        TrieNode* node = root;
+    bool StartsWith(string prefix) {
+        TrieNode* node = root_;
         for (char ch : prefix) {
             int i = ch - 'a';
-            if (!node->children[i]) return false;
-            node = node->children[i];
+            if (!node->children_[i]) return false;
+            node = node->children_[i];
         }
         return true;
     }
@@ -49,17 +49,17 @@ public:
 // Пространственная сложность: O(n - буквы алфавита)
 
 int main() {
-    cout << "Input: insert(\"apple\"), search(\"apple\"), search(\"app\"), "
-         << "startsWith(\"app\"), insert(\"app\"), search(\"app\")\n";
+    cout << "Input: Insert(\"apple\"), Search(\"apple\"), Search(\"app\"), "
+         << "StartsWith(\"app\"), Insert(\"app\"), Search(\"app\")\n";
 
     Trie trie;
-    trie.insert("apple");
+    trie.Insert("apple");
 
-    bool r1 = trie.search("apple");
-    bool r2 = trie.search("app");
-    bool r3 = trie.startsWith("app");
-    trie.insert("app");
-    bool r4 = trie.search("app");
+    bool r1 = trie.Search("apple");
+    bool r2 = trie.Search("app");
+    bool r3 = trie.StartsWith("app");
+    trie.Insert("app");
+    bool r4 = trie.Search("app");
 
     cout << "Output: " << boolalpha << r1 << ", " << r2 << ", " << r3 << ", " << r4
          << " -- expected true, false, true, true\n";

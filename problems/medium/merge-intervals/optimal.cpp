@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+    vector<vector<int>> Merge(vector<vector<int>>& intervals) {
         if (intervals.empty()) return {};
         sort(intervals.begin(), intervals.end());  // Сортировка по start
         vector<vector<int>> merged;
@@ -23,27 +23,27 @@ public:
 // Пространственная сложность: O(n)
 
 int main() {
-    struct Case { vector<vector<int>> intervals; vector<vector<int>> expected; };
+    struct Case { vector<vector<int>> intervals_; vector<vector<int>> expected_; };
     vector<Case> cases = {
         {{{1, 3}, {2, 6}, {8, 10}, {15, 18}}, {{1, 6}, {8, 10}, {15, 18}}},
         {{{1, 4}, {4, 5}}, {{1, 5}}},
         {{{4, 7}, {1, 4}}, {{1, 7}}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        auto result = sol.merge(c.intervals);
+        auto result = sol.Merge(c.intervals_);
         cout << "Input: intervals = ";
-        printVector2D(c.intervals);
+        PrintVector2D(c.intervals_);
         cout << "\nOutput: ";
-        printVector2D(result);
+        PrintVector2D(result);
         cout << " -- expected ";
-        printVector2D(c.expected);
+        PrintVector2D(c.expected_);
         cout << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

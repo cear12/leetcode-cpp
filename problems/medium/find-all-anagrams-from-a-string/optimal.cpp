@@ -3,7 +3,7 @@
 
 class Solution {
 public:
-    vector<int> findAnagrams(string s, string p) {
+    vector<int> FindAnagrams(string s, string p) {
         int n = s.size(), m = p.size();
         vector<int> ans;
         if (m > n) return ans;
@@ -16,21 +16,21 @@ public:
         int need = m; // сколько символов ещё нужно "закрыть" для анаграммы
         int l = 0;
         for (int r = 0; r < n; ++r) {
-            int idxR = s[r] - 'a';
-            if (freq[idxR] > 0) {
+            int idx_r = s[r] - 'a';
+            if (freq[idx_r] > 0) {
                 // этот символ нужен — закрываем одну потребность
                 --need;
             }
-            --freq[idxR];
+            --freq[idx_r];
 
             // держим окно размера m
             if (r - l + 1 > m) {
-                int idxL = s[l] - 'a';
-                if (freq[idxL] >= 0) {
+                int idx_l = s[l] - 'a';
+                if (freq[idx_l] >= 0) {
                     // возвращаем потребность по уходящему символу
                     ++need;
                 }
-                ++freq[idxL];
+                ++freq[idx_l];
                 ++l;
             }
 
@@ -45,25 +45,25 @@ public:
 // Память: O(1)
 
 int main() {
-    struct Case { string s; string p; vector<int> expected; };
+    struct Case { string s_; string p_; vector<int> expected_; };
     vector<Case> cases = {
         {"cbaebabacd", "abc", {0, 6}},
         {"abab", "ab", {0, 1, 2}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (const auto& c : cases) {
-        vector<int> result = sol.findAnagrams(c.s, c.p);
-        cout << "Input: s = \"" << c.s << "\", p = \"" << c.p << "\"\n";
+        vector<int> result = sol.FindAnagrams(c.s_, c.p_);
+        cout << "Input: s = \"" << c.s_ << "\", p = \"" << c.p_ << "\"\n";
         cout << "Output: ";
-        printVector(result);
+        PrintVector(result);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

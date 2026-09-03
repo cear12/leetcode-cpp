@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    void rotate(vector<int>& nums, int k) {
+    void Rotate(vector<int>& nums, int k) {
         int n = nums.size();
         k %= n;
         reverse(nums.begin(), nums.end());
@@ -14,27 +14,27 @@ public:
 // Пространственная сложность: O(1)
 
 int main() {
-    struct Case { vector<int> nums; int k; vector<int> expected; };
+    struct Case { vector<int> nums_; int k_; vector<int> expected_; };
     vector<Case> cases = {
         {{1, 2, 3, 4, 5, 6, 7}, 3, {5, 6, 7, 1, 2, 3, 4}},
         {{-1, -100, 3, 99}, 2, {3, 99, -1, -100}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        vector<int> nums = c.nums;
-        sol.rotate(nums, c.k);
+        vector<int> nums = c.nums_;
+        sol.Rotate(nums, c.k_);
         cout << "Input: nums = ";
-        printVector(c.nums);
-        cout << ", k = " << c.k << "\nOutput: ";
-        printVector(nums);
+        PrintVector(c.nums_);
+        cout << ", k = " << c.k_ << "\nOutput: ";
+        PrintVector(nums);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = nums == c.expected;
-        allOk = allOk && ok;
+        bool ok = nums == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

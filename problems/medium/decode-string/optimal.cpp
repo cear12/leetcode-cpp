@@ -1,7 +1,7 @@
 #include "../../common/leetcode_common.h"
 
 // Эффективное решение: один проход со стеком
-string decodeString(string s) {
+string DecodeString(string s) {
     stack<int> counts;
     stack<string> results;
     string current;
@@ -31,21 +31,21 @@ string decodeString(string s) {
 // Пространственная сложность: O(n + m)
 
 int main() {
-    struct Case { string input; string expected; };
+    struct Case { string input_; string expected_; };
     vector<Case> cases = {
         {"3[a]2[bc]", "aaabcbc"},
         {"3[a2[c]]", "accaccacc"},
         {"2[abc]3[cd]ef", "abcabccdcdcdef"},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     for (const auto& c : cases) {
-        string result = decodeString(c.input);
-        cout << "Input: s = \"" << c.input << "\"\n";
-        cout << "Output: \"" << result << "\" -- expected \"" << c.expected << "\"\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        string result = DecodeString(c.input_);
+        cout << "Input: s = \"" << c.input_ << "\"\n";
+        cout << "Output: \"" << result << "\" -- expected \"" << c.expected_ << "\"\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

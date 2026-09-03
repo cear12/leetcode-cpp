@@ -2,34 +2,34 @@
 
 class Solution {
 public:
-    int maxArea(vector<int>& height) {
+    int MaxArea(vector<int>& height) {
         int left = 0;
         int right = height.size() - 1;
-        int maxWater = 0;
+        int max_water = 0;
         
         while (left < right) {
             int width = right - left;
-            int minHeight = min(height[left], height[right]);
-            maxWater = max(maxWater, width * minHeight);
+            int min_height = min(height[left], height[right]);
+            max_water = max(max_water, width * min_height);
             
             // Пропускаем все линии, которые короче или равны текущей
             // Они точно не улучшат результат при уменьшающейся ширине
             if (height[left] < height[right]) {
-                int currentLeft = height[left];
+                int current_left = height[left];
                 // Двигаем левый указатель пока не найдём более высокую линию
-                while (left < right && height[left] <= currentLeft) {
+                while (left < right && height[left] <= current_left) {
                     left++;
                 }
             } else {
-                int currentRight = height[right];
+                int current_right = height[right];
                 // Двигаем правый указатель пока не найдём более высокую линию
-                while (left < right && height[right] <= currentRight) {
+                while (left < right && height[right] <= current_right) {
                     right--;
                 }
             }
         }
         
-        return maxWater;
+        return max_water;
     }
 };
 // Временная сложность: O(n)
@@ -38,10 +38,10 @@ public:
 int main() {
     vector<int> height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
     Solution sol;
-    int result = sol.maxArea(height);
+    int result = sol.MaxArea(height);
 
     cout << "Input: height = ";
-    printVector(height);
+    PrintVector(height);
     cout << "\nOutput: " << result << " -- expected 49\n";
 
     bool ok = result == 49;

@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int maxCoins(vector<int>& piles) {
+    int MaxCoins(vector<int>& piles) {
         // Сортируем по убыванию - самые ценные монеты в начале
         sort(piles.rbegin(), piles.rend());
         
@@ -23,23 +23,23 @@ public:
     }
 };
 int main() {
-    struct Case { vector<int> piles; int expected; };
+    struct Case { vector<int> piles_; int expected_; };
     vector<Case> cases = {
         {{2, 4, 1, 2, 7, 8}, 9},
         {{2, 4, 5}, 4},
         {{9, 8, 7, 6, 5, 1, 2, 3, 4}, 18},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        int result = sol.maxCoins(c.piles);
+        int result = sol.MaxCoins(c.piles_);
         cout << "Input: piles = ";
-        printVector(c.piles);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector(c.piles_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

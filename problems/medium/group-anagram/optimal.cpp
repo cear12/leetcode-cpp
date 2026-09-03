@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string>& strs) {
+    std::vector<std::vector<std::string>> GroupAnagrams(std::vector<std::string>& strs) {
         std::unordered_map<std::string, std::vector<std::string>> groups;
         for (const auto& s : strs) {
             std::string key = s;
@@ -21,7 +21,7 @@ public:
 // Group order and within-group order are unspecified by the problem, so
 // comparison canonicalizes both: sort strings within each group, then sort
 // the list of groups by their (now-sorted) first element.
-vector<vector<string>> canonicalize(vector<vector<string>> groups) {
+vector<vector<string>> Canonicalize(vector<vector<string>> groups) {
     for (auto& g : groups) sort(g.begin(), g.end());
     sort(groups.begin(), groups.end(),
          [](const vector<string>& a, const vector<string>& b) { return a[0] < b[0]; });
@@ -29,29 +29,29 @@ vector<vector<string>> canonicalize(vector<vector<string>> groups) {
 }
 
 int main() {
-    struct Case { vector<string> strs; vector<vector<string>> expected; };
+    struct Case { vector<string> strs_; vector<vector<string>> expected_; };
     vector<Case> cases = {
         {{"eat", "tea", "tan", "ate", "nat", "bat"},
          {{"bat"}, {"nat", "tan"}, {"ate", "eat", "tea"}}},
         {{"a"}, {{"a"}}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        auto result = canonicalize(sol.groupAnagrams(c.strs));
-        auto expected = canonicalize(c.expected);
+        auto result = Canonicalize(sol.GroupAnagrams(c.strs_));
+        auto expected = Canonicalize(c.expected_);
         cout << "Input: strs = ";
-        printVector(c.strs);
+        PrintVector(c.strs_);
         cout << "\nOutput: ";
-        printVector2D(result);
+        PrintVector2D(result);
         cout << " -- expected (any order) ";
-        printVector2D(expected);
+        PrintVector2D(expected);
         cout << "\n";
         bool ok = result == expected;
-        allOk = allOk && ok;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }
 

@@ -2,17 +2,17 @@
 
 class Solution {
 public:
-    int maxArea(vector<int>& height) {
+    int MaxArea(vector<int>& height) {
         int left = 0;
         int right = height.size() - 1;
-        int maxWater = 0;
+        int max_water = 0;
         
         while (left < right) {
             int width = right - left;
-            int currentHeight = min(height[left], height[right]);
-            int currentArea = width * currentHeight;
+            int current_height = min(height[left], height[right]);
+            int current_area = width * current_height;
             
-            maxWater = max(maxWater, currentArea);
+            max_water = max(max_water, current_area);
             
             // Двигаем указатель на меньшую стенку
             // Потому что если двигать указатель на большую стенку:
@@ -26,7 +26,7 @@ public:
             }
         }
         
-        return maxWater;
+        return max_water;
     }
 };
 // Временная сложность: O(n)
@@ -35,10 +35,10 @@ public:
 int main() {
     vector<int> height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
     Solution sol;
-    int result = sol.maxArea(height);
+    int result = sol.MaxArea(height);
 
     cout << "Input: height = ";
-    printVector(height);
+    PrintVector(height);
     cout << "\nOutput: " << result << " -- expected 49\n";
 
     bool ok = result == 49;

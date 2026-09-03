@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int longestSubarray(vector<int>& nums) {
+    int LongestSubarray(vector<int>& nums) {
         std::ios_base::sync_with_stdio( 0 );
         std::cin.tie( 0 );
 
@@ -29,23 +29,23 @@ public:
 // Пространственная сложность: O(1)
 
 int main() {
-    struct Case { vector<int> nums; int expected; };
+    struct Case { vector<int> nums_; int expected_; };
     vector<Case> cases = {
         {{1, 1, 0, 1}, 3},
         {{0, 1, 1, 1, 0, 1, 1, 0, 1}, 5},
         {{1, 1, 1}, 2},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        int result = sol.longestSubarray(c.nums);
+        int result = sol.LongestSubarray(c.nums_);
         cout << "Input: nums = ";
-        printVector(c.nums);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector(c.nums_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

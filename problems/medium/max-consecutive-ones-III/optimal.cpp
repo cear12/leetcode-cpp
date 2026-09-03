@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int longestOnes(vector<int>& nums, int k) {
+    int LongestOnes(vector<int>& nums, int k) {
         std::ios_base::sync_with_stdio( 0 );
         std::cin.tie( 0 );
 
@@ -29,22 +29,22 @@ public:
 // Пространственная сложность: O(1)
 
 int main() {
-    struct Case { vector<int> nums; int k; int expected; };
+    struct Case { vector<int> nums_; int k_; int expected_; };
     vector<Case> cases = {
         {{1, 1, 1, 0, 0, 0, 1, 1, 1, 1, 0}, 2, 6},
         {{0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 0, 0, 0, 1, 1, 1, 1}, 3, 10},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        int result = sol.longestOnes(c.nums, c.k);
+        int result = sol.LongestOnes(c.nums_, c.k_);
         cout << "Input: nums = ";
-        printVector(c.nums);
-        cout << ", k = " << c.k << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector(c.nums_);
+        cout << ", k = " << c.k_ << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int findMaxConsecutiveOnes(vector<int>& nums) {
+    int FindMaxConsecutiveOnes(vector<int>& nums) {
         int prev = -1, curr = 0, res = 0;
         for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
             if (nums[i] == 0) {
@@ -20,22 +20,22 @@ public:
 // Пространственная сложность: O(1)
 
 int main() {
-    struct Case { vector<int> nums; int expected; };
+    struct Case { vector<int> nums_; int expected_; };
     vector<Case> cases = {
         {{1, 0, 1, 1, 0}, 4},
         {{1, 0, 1, 1, 0, 1}, 4},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        int result = sol.findMaxConsecutiveOnes(c.nums);
+        int result = sol.FindMaxConsecutiveOnes(c.nums_);
         cout << "Input: nums = ";
-        printVector(c.nums);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector(c.nums_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

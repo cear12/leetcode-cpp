@@ -12,28 +12,28 @@
  */
 class Solution {
 public:
-    ListNode* swapPairs(ListNode* head) {
+    ListNode* SwapPairs(ListNode* head) {
         ListNode dummy(0, head);
         ListNode* prev = &dummy;
-        while (head && head->next) {
+        while (head && head->next_) {
             ListNode* first = head;
-            ListNode* second = head->next;
+            ListNode* second = head->next_;
 
-            prev->next = second;
-            first->next = second->next;
-            second->next = first;
+            prev->next_ = second;
+            first->next_ = second->next_;
+            second->next_ = first;
 
             prev = first;
-            head = first->next;
+            head = first->next_;
         }
-        return dummy.next;
+        return dummy.next_;
     }
 };
 // Временная сложность: O(n)
 // Пространственная сложность: O(1)
 
 int main() {
-    struct Case { vector<int> values; vector<int> expected; };
+    struct Case { vector<int> values_; vector<int> expected_; };
     vector<Case> cases = {
         {{1, 2, 3, 4}, {2, 1, 4, 3}},
         {{}, {}},
@@ -41,22 +41,22 @@ int main() {
         {{1, 2, 3}, {2, 1, 3}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        ListNode* head = buildList(c.values);
-        ListNode* result = sol.swapPairs(head);
-        vector<int> resultVec = listToVector(result);
+        ListNode* head = BuildList(c.values_);
+        ListNode* result = sol.SwapPairs(head);
+        vector<int> result_vec = ListToVector(result);
         cout << "Input: head = ";
-        printVector(c.values);
+        PrintVector(c.values_);
         cout << "\nOutput: ";
-        printVector(resultVec);
+        PrintVector(result_vec);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = resultVec == c.expected;
-        allOk = allOk && ok;
+        bool ok = result_vec == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

@@ -4,7 +4,7 @@
 
 class Solution {
 public:
-    int minDistance(string word1, string word2) {
+    int MinDistance(string word1, string word2) {
         int m = word1.size(), n = word2.size();
         vector<int> dp(n + 1);
         for (int j = 0; j <= n; ++j) dp[j] = j;
@@ -25,22 +25,22 @@ public:
 };
 
 int main() {
-    struct Case { string word1; string word2; int expected; };
+    struct Case { string word1_; string word2_; int expected_; };
     vector<Case> cases = {
         {"horse", "ros", 3},
         {"intention", "execution", 5},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (const auto& c : cases) {
-        int result = sol.minDistance(c.word1, c.word2);
-        cout << "Input: word1 = \"" << c.word1 << "\", word2 = \"" << c.word2 << "\"\n";
-        cout << "Output: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        int result = sol.MinDistance(c.word1_, c.word2_);
+        cout << "Input: word1 = \"" << c.word1_ << "\", word2 = \"" << c.word2_ << "\"\n";
+        cout << "Output: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }
 

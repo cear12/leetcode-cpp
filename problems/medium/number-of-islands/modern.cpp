@@ -5,52 +5,52 @@ namespace modern
 
 class UnionFind {
 private:
-    vector<int> parent;
-    vector<int> rank;
-    int components;
+    vector<int> parent_;
+    vector<int> rank_;
+    int components_;
 
 public:
-    UnionFind(int n) : parent(n), rank(n, 0), components(0) {
-        iota(parent.begin(), parent.end(), 0);
+    UnionFind(int n) : parent_(n), rank_(n, 0), components_(0) {
+        iota(parent_.begin(), parent_.end(), 0);
     }
 
-    int find(int x) {
-        if (parent[x] != x) {
-            parent[x] = find(parent[x]);  // Сжатие пути
+    int Find(int x) {
+        if (parent_[x] != x) {
+            parent_[x] = Find(parent_[x]);  // Сжатие пути
         }
-        return parent[x];
+        return parent_[x];
     }
 
-    void unite(int x, int y) {
-        int rootX = find(x);
-        int rootY = find(y);
+    void Unite(int x, int y) {
+        int root_x = Find(x);
+        int root_y = Find(y);
 
-        if (rootX != rootY) {
-            components--;
+        if (root_x != root_y) {
+            components_--;
             // Объединение по рангу
-            if (rank[rootX] < rank[rootY]) {
-                parent[rootX] = rootY;
-            } else if (rank[rootX] > rank[rootY]) {
-                parent[rootY] = rootX;
+            if (rank_[root_x] < rank_[root_y]) {
+                parent_[root_x] = root_y;
+            } else if (rank_[root_x] > rank_[root_y]) {
+                parent_[root_y] = root_x;
             } else {
-                parent[rootY] = rootX;
-                rank[rootX]++;
+                parent_[root_y] = root_x;
+                rank_[root_x]++;
             }
         }
     }
 
-    void addComponent() {
-        components++;
+    void AddComponent() {
+        components_++;
     }
 
-    int getComponents() {
-        return components;
+    int GetComponents() {
+        return components_;
     }
 };
 
 class Solution {
 public:
-    int numIslands(vector<vector<char>>& grid) {
+    int NumIslands(vector<vector<char>>& grid) {
         if (grid.empty() || grid[0].empty()) {  // BUG FIX: was `grid.empty() || grid.empty()` (checked the same thing twice)
             return 0;
         }
@@ -68,7 +68,7 @@ public:
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    uf.addComponent();
+                    uf.AddComponent();
                 }
             }
         }
@@ -77,22 +77,22 @@ public:
         for (int i = 0; i < m; i++) {
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
-                    int currentId = i * n + j;
+                    int current_id = i * n + j;
 
                     for (const auto& [di, dj] : directions) {
                         int ni = i + di;
                         int nj = j + dj;
 
                         if (ni < m && nj < n && grid[ni][nj] == '1') {
-                            int neighborId = ni * n + nj;
-                            uf.unite(currentId, neighborId);
+                            int neighbor_id = ni * n + nj;
+                            uf.Unite(current_id, neighbor_id);
                         }
                     }
                 }
             }
         }
 
-        return uf.getComponents();
+        return uf.GetComponents();
     }
 };
 
@@ -114,7 +114,7 @@ public:
 */
 
 int main() {
-    struct Case { vector<vector<char>> grid; int expected; };
+    struct Case { vector<vector<char>> grid_; int expected_; };
     vector<Case> cases = {
         {{{'1','1','1','1','0'},
            {'1','1','0','1','0'},
@@ -132,17 +132,17 @@ int main() {
            {'0','0','1'}}, 2},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     modern::Solution sol;
     for (auto c : cases) {
-        vector<vector<char>> grid = c.grid;
-        int result = sol.numIslands(grid);
+        vector<vector<char>> grid = c.grid_;
+        int result = sol.NumIslands(grid);
         cout << "Input: grid = ";
-        printVector2D(c.grid);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector2D(c.grid_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

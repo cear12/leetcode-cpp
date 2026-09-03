@@ -3,7 +3,7 @@
 class Solution {
 public:
     // Главная функция: возвращает true, если nums можно разбить на два подмножества с равной суммой
-    bool canPartition(vector<int>& nums) {
+    bool CanPartition(vector<int>& nums) {
         int sum = 0;
         // Считаем сумму всех элементов
         for (int x : nums) sum += x;
@@ -34,22 +34,22 @@ public:
 // Пространственная сложность: O(target)
 
 int main() {
-    struct Case { vector<int> nums; bool expected; };
+    struct Case { vector<int> nums_; bool expected_; };
     vector<Case> cases = {
         {{1, 5, 11, 5}, true},
         {{1, 2, 3, 5}, false},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        bool result = sol.canPartition(c.nums);
+        bool result = sol.CanPartition(c.nums_);
         cout << "Input: nums = ";
-        printVector(c.nums);
-        cout << "\nOutput: " << boolalpha << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector(c.nums_);
+        cout << "\nOutput: " << boolalpha << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

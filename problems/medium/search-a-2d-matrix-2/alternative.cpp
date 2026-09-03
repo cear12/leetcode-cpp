@@ -3,7 +3,7 @@
 // O(m log n) time, O(1) space
 class Solution {
 public:
-    bool searchMatrix(vector<vector<int>>& matrix, int target) {
+    bool SearchMatrix(vector<vector<int>>& matrix, int target) {
         for (const auto& row : matrix) {
             int l = 0, r = row.size() - 1;
             while (l <= r) {
@@ -25,21 +25,21 @@ int main() {
         {10, 13, 14, 17, 24},
         {18, 21, 23, 26, 30},
     };
-    struct Case { int target; bool expected; };
+    struct Case { int target_; bool expected_; };
     vector<Case> cases = {
         {5, true},
         {20, false},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        bool result = sol.searchMatrix(matrix, c.target);
-        cout << "Input: target = " << c.target
-             << "\nOutput: " << boolalpha << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        bool result = sol.SearchMatrix(matrix, c.target_);
+        cout << "Input: target = " << c.target_
+             << "\nOutput: " << boolalpha << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

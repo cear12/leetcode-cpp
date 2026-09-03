@@ -1,39 +1,39 @@
 #include "../../common/leetcode_common.h"
 
 struct TrieNode {
-    unordered_map<char, TrieNode*> next;
-    bool isWord = false;
+    unordered_map<char, TrieNode*> next_;
+    bool is_word_ = false;
 };
 
 class Trie {
 private:
-    TrieNode* root;
+    TrieNode* root_;
 public:
-    Trie() { root = new TrieNode(); }
+    Trie() { root_ = new TrieNode(); }
 
-    void insert(string word) {
-        TrieNode* node = root;
+    void Insert(string word) {
+        TrieNode* node = root_;
         for (char c : word) {
-            if (!node->next[c]) node->next[c] = new TrieNode();
-            node = node->next[c];
+            if (!node->next_[c]) node->next_[c] = new TrieNode();
+            node = node->next_[c];
         }
-        node->isWord = true;
+        node->is_word_ = true;
     }
 
-    bool search(string word) {
-        TrieNode* node = root;
+    bool Search(string word) {
+        TrieNode* node = root_;
         for (char c : word) {
-            if (!node->next[c]) return false;
-            node = node->next[c];
+            if (!node->next_[c]) return false;
+            node = node->next_[c];
         }
-        return node->isWord;
+        return node->is_word_;
     }
 
-    bool startsWith(string prefix) {
-        TrieNode* node = root;
+    bool StartsWith(string prefix) {
+        TrieNode* node = root_;
         for (char c : prefix) {
-            if (!node->next[c]) return false;
-            node = node->next[c];
+            if (!node->next_[c]) return false;
+            node = node->next_[c];
         }
         return true;
     }
@@ -42,17 +42,17 @@ public:
 // Пространственная сложность: O(n)
 
 int main() {
-    cout << "Input: insert(\"apple\"), search(\"apple\"), search(\"app\"), "
-         << "startsWith(\"app\"), insert(\"app\"), search(\"app\")\n";
+    cout << "Input: Insert(\"apple\"), Search(\"apple\"), Search(\"app\"), "
+         << "StartsWith(\"app\"), Insert(\"app\"), Search(\"app\")\n";
 
     Trie trie;
-    trie.insert("apple");
+    trie.Insert("apple");
 
-    bool r1 = trie.search("apple");
-    bool r2 = trie.search("app");
-    bool r3 = trie.startsWith("app");
-    trie.insert("app");
-    bool r4 = trie.search("app");
+    bool r1 = trie.Search("apple");
+    bool r2 = trie.Search("app");
+    bool r3 = trie.StartsWith("app");
+    trie.Insert("app");
+    bool r4 = trie.Search("app");
 
     cout << "Output: " << boolalpha << r1 << ", " << r2 << ", " << r3 << ", " << r4
          << " -- expected true, false, true, true\n";

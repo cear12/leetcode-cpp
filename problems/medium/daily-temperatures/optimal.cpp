@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    vector<int> dailyTemperatures(vector<int>& temperatures) {
+    vector<int> DailyTemperatures(vector<int>& temperatures) {
         std::vector<int> result(temperatures.size(), 0);
         std::stack<int> st;
         for (int i = temperatures.size() - 1; i >= 0; i--) {
@@ -23,15 +23,15 @@ public:
 int main() {
     vector<int> temperatures = {73, 74, 75, 71, 69, 72, 76, 73};
     Solution sol;
-    auto result = sol.dailyTemperatures(temperatures);
+    auto result = sol.DailyTemperatures(temperatures);
 
     cout << "Input: temperatures = ";
-    printVector(temperatures);
+    PrintVector(temperatures);
     cout << "\nOutput: ";
-    printVector(result);
+    PrintVector(result);
     vector<int> expected = {1, 1, 4, 2, 1, 1, 0, 0};
     cout << " -- expected ";
-    printVector(expected);
+    PrintVector(expected);
     cout << "\n";
 
     bool ok = result == expected;

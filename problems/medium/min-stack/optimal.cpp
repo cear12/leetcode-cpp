@@ -1,7 +1,7 @@
 #include "../../common/leetcode_common.h"
 
 /*
-Stack с поддержкой getMin() за O(1) времени.
+Stack с поддержкой GetMin() за O(1) времени.
 - data_  хранит все элементы.
 - mins_  хранит историю минимальных значений, включая повторы.
 */
@@ -9,7 +9,7 @@ class MinStack {
 public:
     MinStack() {}
     
-    void push(int val) {
+    void Push(int val) {
         data_.push(val);
         // Если стек минимумов пуст или новый элемент <= текущему минимуму,
         // добавляем его в mins_ (учитываем повторы).
@@ -18,22 +18,22 @@ public:
         }
     }
     
-    void pop() {
+    void Pop() {
         if (data_.empty()) return;
-        int topVal = data_.top();
+        int top_val = data_.top();
         data_.pop();
         // Если удаляемый элемент равен текущему минимуму, 
         // извлекаем его из mins_.
-        if (!mins_.empty() && topVal == mins_.top()) {
+        if (!mins_.empty() && top_val == mins_.top()) {
             mins_.pop();
         }
     }
     
-    int top() {
+    int Top() {
         return data_.empty() ? -1 : data_.top();
     }
     
-    int getMin() {
+    int GetMin() {
         return mins_.empty() ? -1 : mins_.top();
     }
 
@@ -43,18 +43,18 @@ private:
 };
 
 int main() {
-    cout << "Input: push(-2), push(0), push(-3), getMin(), pop(), top(), getMin()\n";
+    cout << "Input: Push(-2), Push(0), Push(-3), GetMin(), Pop(), Top(), GetMin()\n";
 
     MinStack st;
-    st.push(-2);
-    st.push(0);
-    st.push(-3);
-    int min1 = st.getMin(); // expected -3
-    st.pop();
-    int top1 = st.top();    // expected 0
-    int min2 = st.getMin(); // expected -2
+    st.Push(-2);
+    st.Push(0);
+    st.Push(-3);
+    int min1 = st.GetMin(); // expected -3
+    st.Pop();
+    int top1 = st.Top();    // expected 0
+    int min2 = st.GetMin(); // expected -2
 
-    cout << "Output: getMin()=" << min1 << ", top()=" << top1 << ", getMin()=" << min2
+    cout << "Output: GetMin()=" << min1 << ", Top()=" << top1 << ", GetMin()=" << min2
          << " -- expected -3, 0, -2\n";
 
     bool ok = min1 == -3 && top1 == 0 && min2 == -2;

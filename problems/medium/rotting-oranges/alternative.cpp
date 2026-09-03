@@ -2,30 +2,30 @@
 
 // DFS (медленнее, но наглядно)
 class Solution {
-    int m, n;
-    vector<pair<int, int>> dirs{{-1,0},{1,0},{0,-1},{0,1}};
+    int m_, n_;
+    vector<pair<int, int>> dirs_{{-1,0},{1,0},{0,-1},{0,1}};
 public:
-    int orangesRotting(vector<vector<int>>& grid) {
-        m = grid.size(); n = grid[0].size();  // BUG FIX: was `grid.size()` -- see number-of-islands
+    int OrangesRotting(vector<vector<int>>& grid) {
+        m_ = grid.size(); n_ = grid[0].size();  // BUG FIX: was `grid.size()` -- see number-of-islands
                                                // for the same row/column mixup on non-square grids
-        int maxTime = 0;
-        for (int i=0;i<m;++i)
-            for (int j=0;j<n;++j)
+        int max_time = 0;
+        for (int i=0;i<m_;++i)
+            for (int j=0;j<n_;++j)
                 if (grid[i][j]==2)
-                    dfs(grid, i, j, 0, maxTime);
-        for (int i=0;i<m;++i)
-            for (int j=0;j<n;++j)
+                    Dfs(grid, i, j, 0, max_time);
+        for (int i=0;i<m_;++i)
+            for (int j=0;j<n_;++j)
                 if (grid[i][j]==1) return -1;
-        return maxTime;
+        return max_time;
     }
 private:
-    void dfs(vector<vector<int>>& g, int x, int y, int time, int& maxTime) {
-        maxTime = max(maxTime, time);
-        for (auto [dx,dy] : dirs) {
+    void Dfs(vector<vector<int>>& g, int x, int y, int time, int& max_time) {
+        max_time = max(max_time, time);
+        for (auto [dx,dy] : dirs_) {
             int nx = x+dx, ny = y+dy;
-            if (nx>=0 && nx<m && ny>=0 && ny<n && g[nx][ny]==1) {
+            if (nx>=0 && nx<m_ && ny>=0 && ny<n_ && g[nx][ny]==1) {
                 g[nx][ny]=2;
-                dfs(g, nx, ny, time+1, maxTime);
+                Dfs(g, nx, ny, time+1, max_time);
             }
         }
     }
@@ -33,7 +33,7 @@ private:
 // Время: O((m·n)²)  Память: O(m·n)
 
 int main() {
-    struct Case { vector<vector<int>> grid; int expected; };
+    struct Case { vector<vector<int>> grid_; int expected_; };
     vector<Case> cases = {
         {{{2, 1, 1}, {1, 1, 0}, {0, 1, 1}}, 4},
         {{{2, 1, 1}, {0, 1, 1}, {1, 0, 1}}, -1},
@@ -46,17 +46,17 @@ int main() {
         {{{2, 1, 1}}, 2},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        vector<vector<int>> grid = c.grid;
-        int result = sol.orangesRotting(grid);
+        vector<vector<int>> grid = c.grid_;
+        int result = sol.OrangesRotting(grid);
         cout << "Input: grid = ";
-        printVector2D(c.grid);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector2D(c.grid_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

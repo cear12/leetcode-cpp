@@ -2,51 +2,51 @@
 
 class Solution {
 public:
-    ListNode* removeNthFromEnd(ListNode* head, int n) {
+    ListNode* RemoveNthFromEnd(ListNode* head, int n) {
         ListNode dummy(0);
-        dummy.next = head;
+        dummy.next_ = head;
         int length = 0;
         ListNode* curr = head;
         // Считаем длину списка
         while (curr) {
             ++length;
-            curr = curr->next;
+            curr = curr->next_;
         }
         curr = &dummy;
         // Доходим до узла перед удаляемым
         for (int i = 0; i < length - n; ++i)
-            curr = curr->next;
-        curr->next = curr->next->next;
-        return dummy.next;
+            curr = curr->next_;
+        curr->next_ = curr->next_->next_;
+        return dummy.next_;
     }
 };
 // Временная сложность: O(n)
 // Пространственная сложность: O(1)
 
 int main() {
-    struct Case { vector<int> values; int n; vector<int> expected; };
+    struct Case { vector<int> values_; int n_; vector<int> expected_; };
     vector<Case> cases = {
         {{1, 2, 3, 4, 5}, 2, {1, 2, 3, 5}},
         {{1}, 1, {}},
         {{1, 2}, 1, {1}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        ListNode* head = buildList(c.values);
-        ListNode* result = sol.removeNthFromEnd(head, c.n);
-        vector<int> resultVec = listToVector(result);
+        ListNode* head = BuildList(c.values_);
+        ListNode* result = sol.RemoveNthFromEnd(head, c.n_);
+        vector<int> result_vec = ListToVector(result);
         cout << "Input: head = ";
-        printVector(c.values);
-        cout << ", n = " << c.n << "\nOutput: ";
-        printVector(resultVec);
+        PrintVector(c.values_);
+        cout << ", n = " << c.n_ << "\nOutput: ";
+        PrintVector(result_vec);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = resultVec == c.expected;
-        allOk = allOk && ok;
+        bool ok = result_vec == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

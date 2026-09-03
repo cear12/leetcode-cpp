@@ -2,19 +2,19 @@
 
 class Solution {
 public:
-    ListNode* swapPairs(ListNode* head) {
-        if (!head || !head->next) return head;
-        ListNode* nextNode = head->next;
-        head->next = swapPairs(head->next->next);
-        nextNode->next = head;
-        return nextNode;
+    ListNode* SwapPairs(ListNode* head) {
+        if (!head || !head->next_) return head;
+        ListNode* next_node = head->next_;
+        head->next_ = SwapPairs(head->next_->next_);
+        next_node->next_ = head;
+        return next_node;
     }
 };
 // Временная сложность: O(n)
 // Пространственная сложность: O(n)
 
 int main() {
-    struct Case { vector<int> values; vector<int> expected; };
+    struct Case { vector<int> values_; vector<int> expected_; };
     vector<Case> cases = {
         {{1, 2, 3, 4}, {2, 1, 4, 3}},
         {{}, {}},
@@ -22,22 +22,22 @@ int main() {
         {{1, 2, 3}, {2, 1, 3}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        ListNode* head = buildList(c.values);
-        ListNode* result = sol.swapPairs(head);
-        vector<int> resultVec = listToVector(result);
+        ListNode* head = BuildList(c.values_);
+        ListNode* result = sol.SwapPairs(head);
+        vector<int> result_vec = ListToVector(result);
         cout << "Input: head = ";
-        printVector(c.values);
+        PrintVector(c.values_);
         cout << "\nOutput: ";
-        printVector(resultVec);
+        PrintVector(result_vec);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = resultVec == c.expected;
-        allOk = allOk && ok;
+        bool ok = result_vec == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

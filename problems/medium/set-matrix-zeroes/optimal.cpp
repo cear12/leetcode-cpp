@@ -1,7 +1,7 @@
 #include "../../common/leetcode_common.h"
 
 // Эффективное in-place решение, использующее первую строку и столбец в качестве маркеров
-void setZeroes(vector<vector<int>>& matrix) {
+void SetZeroes(vector<vector<int>>& matrix) {
     int m = matrix.size();      // Количество строк
     int n = matrix[0].size();   // Количество столбцов
     bool col0 = false;          // Нужно ли обнулять первый столбец
@@ -29,26 +29,26 @@ void setZeroes(vector<vector<int>>& matrix) {
 */
 
 int main() {
-    struct Case { vector<vector<int>> matrix; vector<vector<int>> expected; };
+    struct Case { vector<vector<int>> matrix_; vector<vector<int>> expected_; };
     vector<Case> cases = {
         {{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, {{1, 0, 1}, {0, 0, 0}, {1, 0, 1}}},
         {{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}}, {{0, 0, 0, 0}, {0, 4, 5, 0}, {0, 3, 1, 0}}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     for (auto c : cases) {
-        vector<vector<int>> matrix = c.matrix;
-        setZeroes(matrix);
+        vector<vector<int>> matrix = c.matrix_;
+        SetZeroes(matrix);
         cout << "Input: matrix = ";
-        printVector2D(c.matrix);
+        PrintVector2D(c.matrix_);
         cout << "\nOutput: ";
-        printVector2D(matrix);
+        PrintVector2D(matrix);
         cout << " -- expected ";
-        printVector2D(c.expected);
+        PrintVector2D(c.expected_);
         cout << "\n";
-        bool ok = matrix == c.expected;
-        allOk = allOk && ok;
+        bool ok = matrix == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

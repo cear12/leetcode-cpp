@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    vector<vector<int>> threeSum(vector<int>& nums) {
+    vector<vector<int>> ThreeSum(vector<int>& nums) {
         vector<vector<int>> res;
         sort(nums.begin(), nums.end());
         int n = nums.size();
@@ -33,12 +33,12 @@ public:
 int main() {
     vector<int> nums = {-1, 0, 1, 2, -1, -4};
     Solution sol;
-    auto result = sol.threeSum(nums);
+    auto result = sol.ThreeSum(nums);
 
     cout << "Input: nums = ";
-    printVector(nums);
+    PrintVector(nums);
     cout << "\nOutput: ";
-    printVector2D(result);
+    PrintVector2D(result);
     cout << "\nExpected (any order): [[-1,-1,2],[-1,0,1]]\n";
 
     bool ok = result.size() == 2;

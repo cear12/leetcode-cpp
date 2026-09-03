@@ -5,7 +5,7 @@ namespace optimal
 
 class Solution {
 public:
-    int numIslands(vector<vector<char>>& grid) {
+    int NumIslands(vector<vector<char>>& grid) {
         if (grid.empty() || grid[0].empty()) {  // BUG FIX: was `grid.empty() || grid.empty()` (checked the same thing twice)
             return 0;
         }
@@ -20,7 +20,7 @@ public:
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
                     islands++;
-                    dfs(grid, i, j, m, n);
+                    Dfs(grid, i, j, m, n);
                 }
             }
         }
@@ -29,7 +29,7 @@ public:
     }
 
 private:
-    void dfs(vector<vector<char>>& grid, int i, int j, int m, int n) {
+    void Dfs(vector<vector<char>>& grid, int i, int j, int m, int n) {
         // Проверка границ и условия остановки
         if (i < 0 || i >= m || j < 0 || j >= n || grid[i][j] != '1') {
             return;
@@ -39,10 +39,10 @@ private:
         grid[i][j] = '0';
 
         // Рекурсивно обходим все 4 направления
-        dfs(grid, i + 1, j, m, n);  // вниз
-        dfs(grid, i - 1, j, m, n);  // вверх
-        dfs(grid, i, j + 1, m, n);  // вправо
-        dfs(grid, i, j - 1, m, n);  // влево
+        Dfs(grid, i + 1, j, m, n);  // вниз
+        Dfs(grid, i - 1, j, m, n);  // вверх
+        Dfs(grid, i, j + 1, m, n);  // вправо
+        Dfs(grid, i, j - 1, m, n);  // влево
     }
 };
 
@@ -63,7 +63,7 @@ private:
 */
 
 int main() {
-    struct Case { vector<vector<char>> grid; int expected; };
+    struct Case { vector<vector<char>> grid_; int expected_; };
     vector<Case> cases = {
         {{{'1','1','1','1','0'},
            {'1','1','0','1','0'},
@@ -81,17 +81,17 @@ int main() {
            {'0','0','1'}}, 2},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     optimal::Solution sol;
     for (auto c : cases) {
-        vector<vector<char>> grid = c.grid;
-        int result = sol.numIslands(grid);
+        vector<vector<char>> grid = c.grid_;
+        int result = sol.NumIslands(grid);
         cout << "Input: grid = ";
-        printVector2D(c.grid);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector2D(c.grid_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

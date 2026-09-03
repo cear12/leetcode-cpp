@@ -5,7 +5,7 @@
 // BFS с std::deque
 class Solution {
 public:
-    int orangesRotting(vector<vector<int>>& grid) {
+    int OrangesRotting(vector<vector<int>>& grid) {
         int m = grid.size(), n = grid[0].size();  // BUG FIX: was `grid.size()` -- see number-of-islands
                                                    // for the same row/column mixup on non-square grids
         deque<pair<int, int>> dq;
@@ -36,7 +36,7 @@ public:
 // Время: O(m·n)  Память: O(m·n)
 
 int main() {
-    struct Case { vector<vector<int>> grid; int expected; };
+    struct Case { vector<vector<int>> grid_; int expected_; };
     vector<Case> cases = {
         {{{2, 1, 1}, {1, 1, 0}, {0, 1, 1}}, 4},
         {{{2, 1, 1}, {0, 1, 1}, {1, 0, 1}}, -1},
@@ -49,17 +49,17 @@ int main() {
         {{{2, 1, 1}}, 2},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        vector<vector<int>> grid = c.grid;
-        int result = sol.orangesRotting(grid);
+        vector<vector<int>> grid = c.grid_;
+        int result = sol.OrangesRotting(grid);
         cout << "Input: grid = ";
-        printVector2D(c.grid);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector2D(c.grid_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

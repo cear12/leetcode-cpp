@@ -2,15 +2,15 @@
 
 class Solution {
 public:
-    int longestCommonSubsequence(string text1, string text2) {
-        const auto text1Size = text1.size();
-        const auto text2Size = text2.size();
+    int LongestCommonSubsequence(string text1, string text2) {
+        const auto kText1Size = text1.size();
+        const auto kText2Size = text2.size();
 
-        vector< vector< int > > dp( text1Size + 1, vector< int >( text2Size + 1, 0 ) );
+        vector< vector< int > > dp( kText1Size + 1, vector< int >( kText2Size + 1, 0 ) );
 
-        for( int i = 1; i <= static_cast<int>(text1Size); ++i )
+        for( int i = 1; i <= static_cast<int>(kText1Size); ++i )
         {
-            for( int j = 1; j <= static_cast<int>(text2Size); ++j )
+            for( int j = 1; j <= static_cast<int>(kText2Size); ++j )
             {
                 if( text1[ i - 1 ] == text2[ j - 1 ] )
                 {
@@ -23,29 +23,29 @@ public:
             }   
         }
 
-        return dp[ text1Size ][ text2Size ];       
+        return dp[ kText1Size ][ kText2Size ];       
     }
 };
 // Время: O(m*n)
 // Память: O(m*n)
 
 int main() {
-    struct Case { string text1; string text2; int expected; };
+    struct Case { string text1_; string text2_; int expected_; };
     vector<Case> cases = {
         {"abcde", "ace", 3},
         {"abc", "abc", 3},
         {"abc", "def", 0},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (const auto& c : cases) {
-        int result = sol.longestCommonSubsequence(c.text1, c.text2);
-        cout << "Input: text1 = \"" << c.text1 << "\", text2 = \"" << c.text2 << "\"\n";
-        cout << "Output: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        int result = sol.LongestCommonSubsequence(c.text1_, c.text2_);
+        cout << "Input: text1 = \"" << c.text1_ << "\", text2 = \"" << c.text2_ << "\"\n";
+        cout << "Output: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

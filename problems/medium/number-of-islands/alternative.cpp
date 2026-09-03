@@ -5,7 +5,7 @@ namespace alternative
 
 class Solution {
 public:
-    int numIslands(vector<vector<char>>& grid) {
+    int NumIslands(vector<vector<char>>& grid) {
         if (grid.empty() || grid[0].empty()) {  // BUG FIX: was `grid.empty() || grid.empty()` (checked the same thing twice)
             return 0;
         }
@@ -23,7 +23,7 @@ public:
             for (int j = 0; j < n; j++) {
                 if (grid[i][j] == '1') {
                     islands++;
-                    bfs(grid, i, j, m, n, directions);
+                    Bfs(grid, i, j, m, n, directions);
                 }
             }
         }
@@ -32,11 +32,11 @@ public:
     }
 
 private:
-    void bfs(vector<vector<char>>& grid, int startI, int startJ, int m, int n,
+    void Bfs(vector<vector<char>>& grid, int start_i, int start_j, int m, int n,
              const vector<pair<int, int>>& directions) {
         queue<pair<int, int>> q;
-        q.push({startI, startJ});
-        grid[startI][startJ] = '0';  // Помечаем как посещенную
+        q.push({start_i, start_j});
+        grid[start_i][start_j] = '0';  // Помечаем как посещенную
 
         while (!q.empty()) {
             auto [i, j] = q.front();
@@ -74,7 +74,7 @@ private:
 */
 
 int main() {
-    struct Case { vector<vector<char>> grid; int expected; };
+    struct Case { vector<vector<char>> grid_; int expected_; };
     vector<Case> cases = {
         {{{'1','1','1','1','0'},
            {'1','1','0','1','0'},
@@ -92,17 +92,17 @@ int main() {
            {'0','0','1'}}, 2},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     alternative::Solution sol;
     for (auto c : cases) {
-        vector<vector<char>> grid = c.grid;
-        int result = sol.numIslands(grid);
+        vector<vector<char>> grid = c.grid_;
+        int result = sol.NumIslands(grid);
         cout << "Input: grid = ";
-        printVector2D(c.grid);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector2D(c.grid_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    int lengthOfLIS(vector<int>& nums) {
+    int LengthOfLis(vector<int>& nums) {
         vector<int> lis; // lis[i] — минимальный возможный последний элемент возрастающей подпоследовательности длины i+1
 
         for (int num : nums) {
@@ -29,23 +29,23 @@ public:
 // Пространственная сложность: O(n)
 
 int main() {
-    struct Case { vector<int> nums; int expected; };
+    struct Case { vector<int> nums_; int expected_; };
     vector<Case> cases = {
         {{10, 9, 2, 5, 3, 7, 101, 18}, 4},
         {{0, 1, 0, 3, 2, 3}, 4},
         {{7, 7, 7, 7, 7, 7, 7}, 1},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        int result = sol.lengthOfLIS(c.nums);
+        int result = sol.LengthOfLis(c.nums_);
         cout << "Input: nums = ";
-        printVector(c.nums);
-        cout << "\nOutput: " << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector(c.nums_);
+        cout << "\nOutput: " << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

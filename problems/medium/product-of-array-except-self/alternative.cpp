@@ -2,7 +2,7 @@
 
 class Solution {
 public:
-    vector<int> productExceptSelf(vector<int>& nums) {
+    vector<int> ProductExceptSelf(vector<int>& nums) {
         int n = nums.size();
         vector<int> left(n, 1), right(n, 1), result(n);
 
@@ -21,26 +21,26 @@ public:
 // Пространственная сложность: O(n)
 
 int main() {
-    struct Case { vector<int> nums; vector<int> expected; };
+    struct Case { vector<int> nums_; vector<int> expected_; };
     vector<Case> cases = {
         {{1, 2, 3, 4}, {24, 12, 8, 6}},
         {{-1, 1, 0, -3, 3}, {0, 0, 9, 0, 0}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        auto result = sol.productExceptSelf(c.nums);
+        auto result = sol.ProductExceptSelf(c.nums_);
         cout << "Input: nums = ";
-        printVector(c.nums);
+        PrintVector(c.nums_);
         cout << "\nOutput: ";
-        printVector(result);
+        PrintVector(result);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

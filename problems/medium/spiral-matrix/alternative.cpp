@@ -3,7 +3,7 @@
 // Решение 2: Вектор направлений + матрица посещённых
 class Solution {
 public:
-    vector<int> spiralOrder(vector<vector<int>>& matrix) {
+    vector<int> SpiralOrder(vector<vector<int>>& matrix) {
         int m = matrix.size(), n = matrix[0].size();
         vector<vector<bool>> visite(m, vector<bool>(n, false));
         vector<int> dr = {0, 1, 0, -1}, dc = {1, 0, -1, 0};
@@ -27,27 +27,27 @@ public:
 // Пространственная сложность: O(m * n)
 
 int main() {
-    struct Case { vector<vector<int>> matrix; vector<int> expected; };
+    struct Case { vector<vector<int>> matrix_; vector<int> expected_; };
     vector<Case> cases = {
         {{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, {1, 2, 3, 6, 9, 8, 7, 4, 5}},
         {{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}}, {1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7}},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        vector<vector<int>> matrix = c.matrix;
-        auto result = sol.spiralOrder(matrix);
+        vector<vector<int>> matrix = c.matrix_;
+        auto result = sol.SpiralOrder(matrix);
         cout << "Input: matrix = ";
-        printVector2D(c.matrix);
+        PrintVector2D(c.matrix_);
         cout << "\nOutput: ";
-        printVector(result);
+        PrintVector(result);
         cout << " -- expected ";
-        printVector(c.expected);
+        PrintVector(c.expected_);
         cout << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }

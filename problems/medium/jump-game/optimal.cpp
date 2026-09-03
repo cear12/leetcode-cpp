@@ -3,35 +3,35 @@
 // Жадный проход: отслеживаем максимальную достижимую позицию
 class Solution {
 public:
-    bool canJump(const std::vector<int>& nums) {
-        int maxReach = 0;
+    bool CanJump(const std::vector<int>& nums) {
+        int max_reach = 0;
         for (int i = 0; i < static_cast<int>(nums.size()); ++i) {
-            if (i > maxReach) return false;
-            maxReach = std::max(maxReach, i + nums[i]);
+            if (i > max_reach) return false;
+            max_reach = std::max(max_reach, i + nums[i]);
         }
         return true;
     }
 };
 // Временная сложность: O(n), один проход по массиву.
-// Пространственная сложность: O(1), используется только maxReach.
+// Пространственная сложность: O(1), используется только max_reach.
 int main() {
-    struct Case { vector<int> nums; bool expected; };
+    struct Case { vector<int> nums_; bool expected_; };
     vector<Case> cases = {
         {{2, 3, 1, 1, 4}, true},
         {{3, 2, 1, 0, 4}, false},
     };
 
-    bool allOk = true;
+    bool all_ok = true;
     Solution sol;
     for (auto c : cases) {
-        bool result = sol.canJump(c.nums);
+        bool result = sol.CanJump(c.nums_);
         cout << "Input: nums = ";
-        printVector(c.nums);
-        cout << "\nOutput: " << boolalpha << result << " -- expected " << c.expected << "\n";
-        bool ok = result == c.expected;
-        allOk = allOk && ok;
+        PrintVector(c.nums_);
+        cout << "\nOutput: " << boolalpha << result << " -- expected " << c.expected_ << "\n";
+        bool ok = result == c.expected_;
+        all_ok = all_ok && ok;
         cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
     }
-    return allOk ? 0 : 1;
+    return all_ok ? 0 : 1;
 }
 

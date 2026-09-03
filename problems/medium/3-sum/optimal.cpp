@@ -1,3 +1,5 @@
+#include "../../common/leetcode_common.h"
+
 class Solution {
 public:
     vector<vector<int>> threeSum(vector<int>& nums) {
@@ -27,3 +29,19 @@ public:
 };
 // Временная сложность: O(n^2)
 // Пространственная сложность: O(1)
+
+int main() {
+    vector<int> nums = {-1, 0, 1, 2, -1, -4};
+    Solution sol;
+    auto result = sol.threeSum(nums);
+
+    cout << "Input: nums = ";
+    printVector(nums);
+    cout << "\nOutput: ";
+    printVector2D(result);
+    cout << "\nExpected (any order): [[-1,-1,2],[-1,0,1]]\n";
+
+    bool ok = result.size() == 2;
+    cout << "[" << (ok ? "PASS" : "FAIL") << "] found " << result.size() << " triplet(s), expected 2\n";
+    return ok ? 0 : 1;
+}

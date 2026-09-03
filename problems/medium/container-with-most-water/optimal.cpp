@@ -1,3 +1,5 @@
+#include "../../common/leetcode_common.h"
+
 class Solution {
 public:
     int maxArea(vector<int>& height) {
@@ -29,3 +31,17 @@ public:
 };
 // Временная сложность: O(n)
 // Пространственная сложность: O(1)
+
+int main() {
+    vector<int> height = {1, 8, 6, 2, 5, 4, 8, 3, 7};
+    Solution sol;
+    int result = sol.maxArea(height);
+
+    cout << "Input: height = ";
+    printVector(height);
+    cout << "\nOutput: " << result << " -- expected 49\n";
+
+    bool ok = result == 49;
+    cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    return ok ? 0 : 1;
+}

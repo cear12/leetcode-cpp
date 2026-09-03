@@ -1,3 +1,6 @@
+#include "../../common/leetcode_common.h"
+#include <array>  // std::array used below; not guaranteed transitively by the common header
+
 class Solution {
 public:
     vector<int> findAnagrams(string s, string p) {
@@ -40,3 +43,27 @@ public:
 };
 // Время: O(n)
 // Память: O(1)
+
+int main() {
+    struct Case { string s; string p; vector<int> expected; };
+    vector<Case> cases = {
+        {"cbaebabacd", "abc", {0, 6}},
+        {"abab", "ab", {0, 1, 2}},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (const auto& c : cases) {
+        vector<int> result = sol.findAnagrams(c.s, c.p);
+        cout << "Input: s = \"" << c.s << "\", p = \"" << c.p << "\"\n";
+        cout << "Output: ";
+        printVector(result);
+        cout << " -- expected ";
+        printVector(c.expected);
+        cout << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

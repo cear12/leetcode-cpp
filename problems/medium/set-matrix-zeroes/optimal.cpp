@@ -1,27 +1,27 @@
 #include "../../common/leetcode_common.h"
 
-// Эффективное in-place решение, использующее первую строку и столбец в качестве маркеров
+// Эффективное in-place решение, использующее первую строку и столбец в качестве
+// маркеров
 void SetZeroes(vector<vector<int>>& matrix) {
-    int m = matrix.size();      // Количество строк
-    int n = matrix[0].size();   // Количество столбцов
-    bool col0 = false;          // Нужно ли обнулять первый столбец
+  int m = matrix.size();     // Количество строк
+  int n = matrix[0].size();  // Количество столбцов
+  bool col0 = false;         // Нужно ли обнулять первый столбец
 
-    // Первый проход: отмечаем строки и столбцы, которые нужно обнулить
-    for (int i = 0; i < m; ++i) {
-        if (matrix[i][0] == 0) col0 = true;   // Есть ли ноль в первом столбце
-        for (int j = 1; j < n; ++j)
-            if (matrix[i][j] == 0) {
-                matrix[i][0] = 0; // Отметить строку для обнуления
-                matrix[0][j] = 0; // Отметить столбец для обнуления
-            }
-    }
-    // Второй проход: идём в обратном порядке, обнуляем по маркерам
-    for (int i = m - 1; i >= 0; --i) {
-        for (int j = n - 1; j >= 1; --j)
-            if (matrix[i][0] == 0 || matrix[0][j] == 0)
-                matrix[i][j] = 0;
-        if (col0) matrix[i][0] = 0;
-    }
+  // Первый проход: отмечаем строки и столбцы, которые нужно обнулить
+  for (int i = 0; i < m; ++i) {
+    if (matrix[i][0] == 0) col0 = true;  // Есть ли ноль в первом столбце
+    for (int j = 1; j < n; ++j)
+      if (matrix[i][j] == 0) {
+        matrix[i][0] = 0;  // Отметить строку для обнуления
+        matrix[0][j] = 0;  // Отметить столбец для обнуления
+      }
+  }
+  // Второй проход: идём в обратном порядке, обнуляем по маркерам
+  for (int i = m - 1; i >= 0; --i) {
+    for (int j = n - 1; j >= 1; --j)
+      if (matrix[i][0] == 0 || matrix[0][j] == 0) matrix[i][j] = 0;
+    if (col0) matrix[i][0] = 0;
+  }
 }
 /*
 Временная сложность: O(m*n)
@@ -29,26 +29,30 @@ void SetZeroes(vector<vector<int>>& matrix) {
 */
 
 int main() {
-    struct Case { vector<vector<int>> matrix_; vector<vector<int>> expected_; };
-    vector<Case> cases = {
-        {{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, {{1, 0, 1}, {0, 0, 0}, {1, 0, 1}}},
-        {{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}}, {{0, 0, 0, 0}, {0, 4, 5, 0}, {0, 3, 1, 0}}},
-    };
+  struct Case {
+    vector<vector<int>> matrix_;
+    vector<vector<int>> expected_;
+  };
+  vector<Case> cases = {
+      {{{1, 1, 1}, {1, 0, 1}, {1, 1, 1}}, {{1, 0, 1}, {0, 0, 0}, {1, 0, 1}}},
+      {{{0, 1, 2, 0}, {3, 4, 5, 2}, {1, 3, 1, 5}},
+       {{0, 0, 0, 0}, {0, 4, 5, 0}, {0, 3, 1, 0}}},
+  };
 
-    bool all_ok = true;
-    for (auto c : cases) {
-        vector<vector<int>> matrix = c.matrix_;
-        SetZeroes(matrix);
-        cout << "Input: matrix = ";
-        PrintVector2D(c.matrix_);
-        cout << "\nOutput: ";
-        PrintVector2D(matrix);
-        cout << " -- expected ";
-        PrintVector2D(c.expected_);
-        cout << "\n";
-        bool ok = matrix == c.expected_;
-        all_ok = all_ok && ok;
-        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
-    }
-    return all_ok ? 0 : 1;
+  bool all_ok = true;
+  for (auto c : cases) {
+    vector<vector<int>> matrix = c.matrix_;
+    SetZeroes(matrix);
+    cout << "Input: matrix = ";
+    PrintVector2D(c.matrix_);
+    cout << "\nOutput: ";
+    PrintVector2D(matrix);
+    cout << " -- expected ";
+    PrintVector2D(c.expected_);
+    cout << "\n";
+    bool ok = matrix == c.expected_;
+    all_ok = all_ok && ok;
+    cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+  }
+  return all_ok ? 0 : 1;
 }

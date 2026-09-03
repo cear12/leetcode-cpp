@@ -2,42 +2,45 @@
 
 // O(m + n) time, O(1) space
 class Solution {
-public:
-    bool SearchMatrix(vector<vector<int>>& matrix, int target) {
-        int m = matrix.size(), n = matrix[0].size();
-        int i = 0, j = n - 1;
-        while (i < m && j >= 0) {
-            if (matrix[i][j] == target) return true;
-            else if (matrix[i][j] > target) --j;
-            else ++i;
-        }
-        return false;
+ public:
+  bool SearchMatrix(vector<vector<int>>& matrix, int target) {
+    int m = matrix.size(), n = matrix[0].size();
+    int i = 0, j = n - 1;
+    while (i < m && j >= 0) {
+      if (matrix[i][j] == target)
+        return true;
+      else if (matrix[i][j] > target)
+        --j;
+      else
+        ++i;
     }
+    return false;
+  }
 };
 
 int main() {
-    vector<vector<int>> matrix = {
-        {1, 4, 7, 11, 15},
-        {2, 5, 8, 12, 19},
-        {3, 6, 9, 16, 22},
-        {10, 13, 14, 17, 24},
-        {18, 21, 23, 26, 30},
-    };
-    struct Case { int target_; bool expected_; };
-    vector<Case> cases = {
-        {5, true},
-        {20, false},
-    };
+  vector<vector<int>> matrix = {
+      {1, 4, 7, 11, 15},    {2, 5, 8, 12, 19},    {3, 6, 9, 16, 22},
+      {10, 13, 14, 17, 24}, {18, 21, 23, 26, 30},
+  };
+  struct Case {
+    int target_;
+    bool expected_;
+  };
+  vector<Case> cases = {
+      {5, true},
+      {20, false},
+  };
 
-    bool all_ok = true;
-    Solution sol;
-    for (auto c : cases) {
-        bool result = sol.SearchMatrix(matrix, c.target_);
-        cout << "Input: target = " << c.target_
-             << "\nOutput: " << boolalpha << result << " -- expected " << c.expected_ << "\n";
-        bool ok = result == c.expected_;
-        all_ok = all_ok && ok;
-        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
-    }
-    return all_ok ? 0 : 1;
+  bool all_ok = true;
+  Solution sol;
+  for (auto c : cases) {
+    bool result = sol.SearchMatrix(matrix, c.target_);
+    cout << "Input: target = " << c.target_ << "\nOutput: " << boolalpha
+         << result << " -- expected " << c.expected_ << "\n";
+    bool ok = result == c.expected_;
+    all_ok = all_ok && ok;
+    cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+  }
+  return all_ok ? 0 : 1;
 }

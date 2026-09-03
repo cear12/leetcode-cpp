@@ -34,47 +34,47 @@
 using namespace std;
 
 struct ListNode {
-    int val_;
-    ListNode* next_;
-    ListNode() : val_(0), next_(nullptr) {}
-    ListNode(int x) : val_(x), next_(nullptr) {}
-    ListNode(int x, ListNode* next) : val_(x), next_(next) {}
+  int val_;
+  ListNode* next_;
+  ListNode() : val_(0), next_(nullptr) {}
+  ListNode(int x) : val_(x), next_(nullptr) {}
+  ListNode(int x, ListNode* next) : val_(x), next_(next) {}
 };
 
 inline ListNode* BuildList(const vector<int>& values) {
-    ListNode dummy(0);
-    ListNode* tail = &dummy;
-    for (int v : values) {
-        tail->next_ = new ListNode(v);
-        tail = tail->next_;
-    }
-    return dummy.next_;
+  ListNode dummy(0);
+  ListNode* tail = &dummy;
+  for (int v : values) {
+    tail->next_ = new ListNode(v);
+    tail = tail->next_;
+  }
+  return dummy.next_;
 }
 
 inline vector<int> ListToVector(ListNode* head) {
-    vector<int> out;
-    for (ListNode* n = head; n != nullptr; n = n->next_) out.push_back(n->val_);
-    return out;
+  vector<int> out;
+  for (ListNode* n = head; n != nullptr; n = n->next_) out.push_back(n->val_);
+  return out;
 }
 
 template <typename T>
 void PrintVector(const vector<T>& v) {
-    cout << "[";
-    for (size_t i = 0; i < v.size(); ++i) {
-        cout << v[i];
-        if (i + 1 < v.size()) cout << ", ";
-    }
-    cout << "]";
+  cout << "[";
+  for (size_t i = 0; i < v.size(); ++i) {
+    cout << v[i];
+    if (i + 1 < v.size()) cout << ", ";
+  }
+  cout << "]";
 }
 
 template <typename T>
 void PrintVector2D(const vector<vector<T>>& v) {
-    cout << "[";
-    for (size_t i = 0; i < v.size(); ++i) {
-        PrintVector(v[i]);
-        if (i + 1 < v.size()) cout << ", ";
-    }
-    cout << "]";
+  cout << "[";
+  for (size_t i = 0; i < v.size(); ++i) {
+    PrintVector(v[i]);
+    if (i + 1 < v.size()) cout << ", ";
+  }
+  cout << "]";
 }
 
 inline void PrintBool(bool b) { cout << (b ? "true" : "false"); }

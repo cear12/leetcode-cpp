@@ -51,6 +51,18 @@ Every `.cpp` file becomes its own executable and its own CTest case (86 in
 total); a test passes only if every check inside that file's `main()`
 reported `[PASS]`. There are no external dependencies.
 
+## Building in Visual Studio
+
+With 86 independent solution executables and no single "main app", Visual
+Studio's Open Folder / CMake integration has nothing to pick as a default
+startup item. Without one, pressing **Debug/Run** (not Build) pops a
+blocking "Select Startup Item" dialog -- easy to mistake for the project
+failing to build, even though **Build > Build All** (Ctrl+Shift+B)
+succeeds regardless of what's selected there. `CMakePresets.json` sets
+`CMAKE_VS_STARTUP_PROJECT` to `medium__3-sum__alternative` (alphabetically
+first target) so Debug/Run works immediately too; pick a different target
+from the dropdown next to the Run button to debug any of the others.
+
 ## Bugs found and fixed during cleanup
 
 This repository originally had no build system and had never been compiled

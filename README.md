@@ -17,7 +17,7 @@ problems/
       modern.cpp            # a third approach using newer STL features (when present)
 ```
 
-There are 46 problems, most with 2-3 independent solution files, for 86
+There are 49 problems, most with 2-3 independent solution files, for 91
 `.cpp` files total. Every file is a self-contained translation unit with its
 own `main()` that runs the solution against the examples from that problem's
 `README.md` and prints `[PASS]`/`[FAIL]` per case — these are not just
@@ -47,13 +47,13 @@ cmake --build build
 ctest --test-dir build --output-on-failure
 ```
 
-Every `.cpp` file becomes its own executable and its own CTest case (86 in
+Every `.cpp` file becomes its own executable and its own CTest case (91 in
 total); a test passes only if every check inside that file's `main()`
 reported `[PASS]`. There are no external dependencies.
 
 ## Building in Visual Studio
 
-With 86 independent solution executables and no single "main app", Visual
+With 91 independent solution executables and no single "main app", Visual
 Studio's Open Folder / CMake integration has nothing to pick as a default
 startup item. Without one, pressing **Debug/Run** (not Build) pops a
 blocking "Select Startup Item" dialog -- easy to mistake for the project

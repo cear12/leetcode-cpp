@@ -1,6 +1,4 @@
-#include <string>
-#include <stack>
-using namespace std;
+#include "../../common/leetcode_common.h"
 
 // Эффективное решение: один проход со стеком
 string decodeString(string s) {
@@ -31,3 +29,23 @@ string decodeString(string s) {
 }
 // Временная сложность: O(n*m) — n символов, m максимальное повторение
 // Пространственная сложность: O(n + m)
+
+int main() {
+    struct Case { string input; string expected; };
+    vector<Case> cases = {
+        {"3[a]2[bc]", "aaabcbc"},
+        {"3[a2[c]]", "accaccacc"},
+        {"2[abc]3[cd]ef", "abcabccdcdcdef"},
+    };
+
+    bool allOk = true;
+    for (const auto& c : cases) {
+        string result = decodeString(c.input);
+        cout << "Input: s = \"" << c.input << "\"\n";
+        cout << "Output: \"" << result << "\" -- expected \"" << c.expected << "\"\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

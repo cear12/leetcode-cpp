@@ -1,7 +1,4 @@
-#include <vector>
-#include <queue>
-
-using namespace std;
+#include "../../common/leetcode_common.h"
 
 // BFS (топологическая сортировка — Kahn’s Algorithm)
 class Solution {
@@ -28,3 +25,21 @@ public:
     }
 };
 // Время: O(N+E), Память: O(N+E)
+
+int main() {
+    Solution sol1;
+    vector<vector<int>> prereq1 = {{1, 0}};
+    bool result1 = sol1.canFinish(2, prereq1);
+    cout << "Input: numCourses = 2, prerequisites = [[1,0]]\n";
+    cout << "Output: " << boolalpha << result1 << " -- expected true\n";
+
+    Solution sol2;
+    vector<vector<int>> prereq2 = {{1, 0}, {0, 1}};
+    bool result2 = sol2.canFinish(2, prereq2);
+    cout << "Input: numCourses = 2, prerequisites = [[1,0],[0,1]]\n";
+    cout << "Output: " << result2 << " -- expected false\n";
+
+    bool ok = result1 == true && result2 == false;
+    cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    return ok ? 0 : 1;
+}

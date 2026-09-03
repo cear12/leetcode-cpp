@@ -1,6 +1,6 @@
+#include "../../common/leetcode_common.h"
+
 // Решение 2: Вектор направлений + матрица посещённых
-#include <vector>
-using namespace std;
 class Solution {
 public:
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
@@ -25,3 +25,29 @@ public:
 };
 // Временная сложность: O(m * n)
 // Пространственная сложность: O(m * n)
+
+int main() {
+    struct Case { vector<vector<int>> matrix; vector<int> expected; };
+    vector<Case> cases = {
+        {{{1, 2, 3}, {4, 5, 6}, {7, 8, 9}}, {1, 2, 3, 6, 9, 8, 7, 4, 5}},
+        {{{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}}, {1, 2, 3, 4, 8, 12, 11, 10, 9, 5, 6, 7}},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (auto c : cases) {
+        vector<vector<int>> matrix = c.matrix;
+        auto result = sol.spiralOrder(matrix);
+        cout << "Input: matrix = ";
+        printVector2D(c.matrix);
+        cout << "\nOutput: ";
+        printVector(result);
+        cout << " -- expected ";
+        printVector(c.expected);
+        cout << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

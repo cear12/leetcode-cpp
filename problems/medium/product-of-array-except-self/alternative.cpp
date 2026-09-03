@@ -1,3 +1,5 @@
+#include "../../common/leetcode_common.h"
+
 class Solution {
 public:
     vector<int> productExceptSelf(vector<int>& nums) {
@@ -17,3 +19,28 @@ public:
     }
 };// Временная сложность: O(n)
 // Пространственная сложность: O(n)
+
+int main() {
+    struct Case { vector<int> nums; vector<int> expected; };
+    vector<Case> cases = {
+        {{1, 2, 3, 4}, {24, 12, 8, 6}},
+        {{-1, 1, 0, -3, 3}, {0, 0, 9, 0, 0}},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (auto c : cases) {
+        auto result = sol.productExceptSelf(c.nums);
+        cout << "Input: nums = ";
+        printVector(c.nums);
+        cout << "\nOutput: ";
+        printVector(result);
+        cout << " -- expected ";
+        printVector(c.expected);
+        cout << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

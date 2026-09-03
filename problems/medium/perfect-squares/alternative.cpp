@@ -1,8 +1,6 @@
-#include <queue>
+#include "../../common/leetcode_common.h"
 
-using namespace std;
-
-class Solution2 {
+class Solution {
 public:
     int numSquares(int n) {
         queue<int> q;
@@ -25,3 +23,22 @@ public:
         return 0;
     }
 };
+
+int main() {
+    struct Case { int n; int expected; };
+    vector<Case> cases = {
+        {12, 3},
+        {13, 2},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (auto c : cases) {
+        int result = sol.numSquares(c.n);
+        cout << "Input: n = " << c.n << "\nOutput: " << result << " -- expected " << c.expected << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

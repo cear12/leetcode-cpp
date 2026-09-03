@@ -1,8 +1,4 @@
-#include <vector>
-using namespace std;
-
-#include <vector>
-using namespace std;
+#include "../../common/leetcode_common.h"
 
 class Solution {
 public:
@@ -36,3 +32,24 @@ public:
 
 // Временная сложность: O(n * target), где n — размер массива, target — половина суммы
 // Пространственная сложность: O(target)
+
+int main() {
+    struct Case { vector<int> nums; bool expected; };
+    vector<Case> cases = {
+        {{1, 5, 11, 5}, true},
+        {{1, 2, 3, 5}, false},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (auto c : cases) {
+        bool result = sol.canPartition(c.nums);
+        cout << "Input: nums = ";
+        printVector(c.nums);
+        cout << "\nOutput: " << boolalpha << result << " -- expected " << c.expected << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

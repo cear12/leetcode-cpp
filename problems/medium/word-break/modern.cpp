@@ -1,4 +1,5 @@
-#include <unordered_set>
+#include "../../common/leetcode_common.h"
+
 #include <string_view>
 
 class Solution {
@@ -17,3 +18,26 @@ public:
         return dp[s.size()];
     }
 };
+
+int main() {
+    struct Case { string s; vector<string> wordDict; bool expected; };
+    vector<Case> cases = {
+        {"leetcode", {"leet", "code"}, true},
+        {"applepenapple", {"apple", "pen"}, true},
+        {"catsandog", {"cats", "dog", "sand", "and", "cat"}, false},
+    };
+
+    bool allOk = true;
+    Solution sol;
+    for (auto c : cases) {
+        vector<string> wordDict = c.wordDict;
+        bool result = sol.wordBreak(c.s, wordDict);
+        cout << "Input: s = \"" << c.s << "\", wordDict = ";
+        printVector(c.wordDict);
+        cout << "\nOutput: " << boolalpha << result << " -- expected " << c.expected << "\n";
+        bool ok = result == c.expected;
+        allOk = allOk && ok;
+        cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    }
+    return allOk ? 0 : 1;
+}

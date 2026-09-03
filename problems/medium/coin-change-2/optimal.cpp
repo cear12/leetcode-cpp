@@ -1,3 +1,5 @@
+#include "../../common/leetcode_common.h"
+
 class Solution {
 public:
     int change(int amount, vector<int>& coins) {
@@ -25,3 +27,17 @@ public:
     }
 };
 
+
+int main() {
+    int amount = 5;
+    vector<int> coins = {1, 2, 5};
+    Solution sol;
+    int result = sol.change(amount, coins);
+
+    cout << "Input: amount = 5, coins = [1,2,5]\n";
+    cout << "Output: " << result << " -- expected 4\n";
+
+    bool ok = result == 4;
+    cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    return ok ? 0 : 1;
+}

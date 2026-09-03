@@ -1,8 +1,8 @@
+#include "../../common/leetcode_common.h"
+
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        const auto size = coins.size();
-
         vector<int> dp( amount + 1, INT_MAX ); 
 
         dp[ 0 ] = 0;
@@ -23,3 +23,17 @@ public:
 };
 // Временная сложность: O(amount * k), где k — количество монет
 // Пространственная сложность: O(amount)
+
+int main() {
+    vector<int> coins = {1, 2, 5};
+    int amount = 11;
+    Solution sol;
+    int result = sol.coinChange(coins, amount);
+
+    cout << "Input: coins = [1,2,5], amount = 11\n";
+    cout << "Output: " << result << " -- expected 3\n";
+
+    bool ok = result == 3;
+    cout << "[" << (ok ? "PASS" : "FAIL") << "]\n";
+    return ok ? 0 : 1;
+}

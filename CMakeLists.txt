@@ -9,7 +9,13 @@ if(NOT CMAKE_BUILD_TYPE)
     set(CMAKE_BUILD_TYPE Release)
 endif()
 
-add_compile_options(-Wall -Wextra -Wpedantic)
+# GCC/Clang spelling of the warning flags; MSVC rejects -Wextra outright
+# (error D8021: invalid numeric argument), which is what broke the Windows job.
+if(MSVC)
+    add_compile_options(/W4)
+else()
+    add_compile_options(-Wall -Wextra -Wpedantic)
+endif()
 
 include(CTest)
 enable_testing()
